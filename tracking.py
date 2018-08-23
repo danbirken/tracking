@@ -34,7 +34,7 @@ class Tracker(object):
             event_info['time'] = time.time()
             event_info['ctime'] = datetime.datetime.now().ctime()
             self._record(event_info)
-        except Exception, e:
+        except Exception as e:
             self._log_tracking_error('Exception in track_event: %s' % e)
 
     def track_view(self, request, info=None):
@@ -54,12 +54,12 @@ class Tracker(object):
                 'view',
                 event_info
             )
-        except Exception, e:
+        except Exception as e:
             self._log_tracking_error('Exception in track_event: %s' % e)
 
 class ConsoleTracker(Tracker):
     def _record(self, event):
-        print json.dumps(event)
+        print(json.dumps(event))
 
 class MongoTracker(Tracker):
     def __init__(self, request_parser, logger, mongo_uri):
